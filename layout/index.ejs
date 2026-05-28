@@ -1,0 +1,53 @@
+<section class="hero-panel reveal hero-bordered">
+  <div class="hero-pattern">
+    <% const pText = theme.hero_pattern_text || 'MIMO'; %>
+    <% for (let r = 0; r < 7; r++) { %>
+      <p class="hero-pattern-line" style="--line-dir:<%= r % 2 === 0 ? 1 : -1 %>;"><%= (pText + ' ').repeat(10) %></p>
+    <% } %>
+  </div>
+
+  <div class="hero-main">
+    <h1><%= (theme.slogan && theme.slogan.main) || '你好，我是 MiMo' %></h1>
+  </div>
+
+  <div
+    class="hero-lens"
+    data-follow-mouse="true"
+    style="--lens-size:170px;--lens-top:52%;--lens-left:58%;"
+    aria-hidden="true"
+  >
+    <div class="hero-main hero-main-invert">
+      <h1><%= (theme.slogan && theme.slogan.lens) || "HELLO, I'M MiMo" %></h1>
+    </div>
+  </div>
+</section>
+
+<section class="post-grid model-grid reveal">
+  <% const boxColors = [
+    (theme.colors && theme.colors.home_box_1_bg) || '#f4f3ef',
+    (theme.colors && theme.colors.home_box_2_bg) || '#f1f0eb',
+    (theme.colors && theme.colors.home_box_3_bg) || '#eeede8'
+  ]; %>
+  <% (theme.home_boxes || []).forEach(function(box, idx){ %>
+    <a class="card model-card model-card-link" href="<%- url_for(box.url || '/') %>" style="background:<%= boxColors[idx] || boxColors[boxColors.length - 1] %>;">
+      <h2><%= box.title %></h2>
+      <p><%= box.subtitle %></p>
+    </a>
+  <% }) %>
+</section>
+
+<section class="blog-list reveal">
+  <header class="blog-list-head">
+    <h2><%= (theme.blog_section && theme.blog_section.title) || 'Blog' %></h2>
+  </header>
+  <% const blogLimit = (theme.blog_section && theme.blog_section.limit) || 3; %>
+  <% page.posts.limit(blogLimit).each(function(post, idx){ %>
+    <a class="blog-row" href="<%- url_for(post.path) %>">
+      <div class="blog-no"><%= String(idx + 1).padStart(2, '0') %></div>
+      <div class="blog-main">
+        <h3><%= post.title %></h3>
+      </div>
+      <div class="blog-arrow">→</div>
+    </a>
+  <% }) %>
+</section>

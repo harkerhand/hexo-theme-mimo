@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="<%= config.language || 'zh-CN' %>">
+<head>
+  <%- partial('partial/head') %>
+</head>
+<body style="--page-bg:<%= (theme.colors && theme.colors.page_bg) || '#f8f7f3' %>;--hero-bg:<%= (theme.colors && theme.colors.hero_bg) || '#fbfaf7' %>;">
+  <div class="noise"></div>
+  <%- partial('partial/topbar') %>
+  <main class="container">
+    <%- body %>
+  </main>
+  <%- partial('partial/footer') %>
+  <script src="<%- url_for('/js/main.js') %>"></script>
+</body>
+</html>

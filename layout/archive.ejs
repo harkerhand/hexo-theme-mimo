@@ -1,0 +1,14 @@
+<section class="block reveal">
+  <h1><%= page.title || 'Archives' %></h1>
+  <div class="post-grid">
+    <% page.posts.each(function(post, idx){ %>
+      <article class="card">
+        <p class="num"><%= (idx + 1).toString().padStart(2, '0') %></p>
+        <h2><a href="<%- url_for(post.path) %>"><%= post.title %></a></h2>
+        <p><%= post.date.format('YYYY-MM-DD') %></p>
+      </article>
+    <% }) %>
+  </div>
+</section>
+
+<%- partial('partial/paginator') %>

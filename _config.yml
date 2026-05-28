@@ -1,0 +1,59 @@
+# 首页口号文案
+# `main`：首屏中间显示的主句
+# `lens`：鼠标圆形区域内显示的句子
+slogan:
+  main: 你好，我是 MiMo
+  lens: HELLO, I'M MiMo
+
+# 顶部导航配置
+# `logo_text`：左上角品牌文字
+# `logo_url`：点击品牌后的跳转链接
+# `nav`：右侧导航列表
+#   - `text`：导航名称
+#   - `url`：导航跳转地址
+topbar:
+  logo_text: Xiaomi MiMo
+  logo_url: /
+  nav:
+    - text: Blog
+      url: /archives/
+    - text: Join us
+      url: /join-us/
+
+# 颜色配置（共 5 项）
+# `page_bg`：整站页面背景色
+# `hero_bg`：首屏大方块背景色
+# `home_box_1_bg`：下方第 1 个小方块背景色
+# `home_box_2_bg`：下方第 2 个小方块背景色
+# `home_box_3_bg`：下方第 3 个小方块背景色
+colors:
+  page_bg: "#f8f7f3"
+  hero_bg: "#fbfaf7"
+  home_box_1_bg: "#f4f3ef"
+  home_box_2_bg: "#f1f0eb"
+  home_box_3_bg: "#eeede8"
+
+# 首屏标题后面的重复背景字
+hero_pattern_text: MIMO
+
+# 首屏下方三列卡片配置
+# `title`：主标题
+# `subtitle`：副标题
+# `url`：点击后跳转地址
+home_boxes:
+  - title: Xiaomi MiMo-V2.5-Pro
+    subtitle: A leap in agentic and long horizon coherence.
+    url: /archives/
+  - title: Xiaomi MiMo-V2.5
+    subtitle: A leap in agency and multimodality.
+    url: /archives/
+  - title: Xiaomi MiMo-V2.5-TTS Series
+    subtitle: Give your agent a voice. Give it a soul.
+    url: /archives/
+
+# 首页下方 Blog 列表配置
+# `title`：区块标题
+# `limit`：显示的文章数量（数据来自 source/_posts）
+blog_section:
+  title: Blog
+  limit: 3
