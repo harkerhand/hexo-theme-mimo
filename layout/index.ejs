@@ -36,8 +36,8 @@
   <% }) %>
 </section>
 
-<section class="blog-list reveal">
-  <header class="blog-list-head">
+<section class="blog-list reveal" id="home-blog">
+  <header class="blog-list-head" id="home-blog-head">
     <h2><%= (theme.blog_section && theme.blog_section.title) || 'Blog' %></h2>
   </header>
   <% const blogLimit = (theme.blog_section && theme.blog_section.limit) || 3; %>

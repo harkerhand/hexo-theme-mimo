@@ -37,11 +37,51 @@ function applyCodeLangBadges(root = document) {
   });
 }
 
+let cleanupHomeBlogQuick = null;
+
+function initHomeBlogQuick() {
+  if (cleanupHomeBlogQuick) {
+    cleanupHomeBlogQuick();
+    cleanupHomeBlogQuick = null;
+  }
+
+  const jump = document.querySelector('[data-home-blog-jump="true"]');
+  const blogHead = document.querySelector('#home-blog-head');
+  const topbar = document.querySelector('.topbar');
+  if (!jump || !blogHead || !topbar) return;
+
+  const getTopbarHeight = () => topbar.getBoundingClientRect().height;
+  const updateVisibility = () => {
+    const rect = blogHead.getBoundingClientRect();
+    const topbarHeight = getTopbarHeight();
+    const fullyVisible = rect.top >= topbarHeight && rect.bottom <= window.innerHeight;
+    jump.classList.toggle('is-hidden', fullyVisible);
+  };
+
+  const onClick = (event) => {
+    event.preventDefault();
+    const targetTop = window.scrollY + blogHead.getBoundingClientRect().top - getTopbarHeight() - 8;
+    window.scrollTo({ top: Math.max(0, targetTop), behavior: 'smooth' });
+  };
+
+  jump.addEventListener('click', onClick);
+  window.addEventListener('scroll', updateVisibility, { passive: true });
+  window.addEventListener('resize', updateVisibility);
+  updateVisibility();
+
+  cleanupHomeBlogQuick = () => {
+    jump.removeEventListener('click', onClick);
+    window.removeEventListener('scroll', updateVisibility);
+    window.removeEventListener('resize', updateVisibility);
+  };
+}
+
 function initPage(root = document, options = {}) {
   const animate = options.animate !== false;
   if (animate) applyRevealDelays(root);
   initHeroLens(root);
   applyCodeLangBadges(root);
+  initHomeBlogQuick();
 }
 
 function isInternalNavLink(anchor) {

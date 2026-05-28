@@ -1,0 +1,35 @@
+<section class="block links-block reveal">
+  <% const links = (theme.friend_links || []); %>
+  <% if (links.length) { %>
+    <div class="links-grid">
+      <% links.forEach(function(item, idx){ %>
+        <a class="links-card" href="<%= item.url %>" target="_blank" rel="noopener noreferrer">
+          <div class="links-card-no">
+            <% if (item.avatar) { %>
+              <img class="links-avatar" src="<%= item.avatar %>" alt="<%= item.name %> avatar" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='inline';">
+              <span class="links-fallback-num"><%= (idx + 1).toString().padStart(2, '0') %></span>
+            <% } else { %>
+              <span><%= (idx + 1).toString().padStart(2, '0') %></span>
+            <% } %>
+          </div>
+          <div class="links-card-main">
+            <h3><%= item.name %></h3>
+            <% if (item.desc) { %><p><%= item.desc %></p><% } %>
+          </div>
+          <div class="links-card-arrow">→</div>
+        </a>
+      <% }) %>
+    </div>
+  <% } else { %>
+    <div class="links-grid">
+      <div class="links-card links-empty">
+        <div class="links-card-no">--</div>
+        <div class="links-card-main">
+          <h3>暂无友链</h3>
+          <p>请在 `_config.mimo.yml` 中配置 `friend_links`。</p>
+        </div>
+        <div class="links-card-arrow">·</div>
+      </div>
+    </div>
+  <% } %>
+</section>

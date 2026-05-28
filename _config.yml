@@ -57,3 +57,17 @@ home_boxes:
 blog_section:
   title: Blog
   limit: 3
+
+# 友链页面配置
+# `friend_links`：友链列表
+#   - `name`：站点名称
+#   - `desc`：站点简介
+#   - `url`：跳转地址
+#   - `avatar`：头像地址（可选）
+friend_links:
+  - name: Hexo
+    desc: 快速、简洁且高效的博客框架。
+    url: https://hexo.io/
+  - name: Xiaomi MiMo
+    desc: MiMo 官方网站。
+    url: https://mimo.xiaomi.com/zh/index

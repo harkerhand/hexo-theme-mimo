@@ -1,6 +1,9 @@
 <header class="topbar">
   <a class="logo" href="<%- url_for((theme.topbar && theme.topbar.logo_url) || '/') %>"><%= (theme.topbar && theme.topbar.logo_text) || 'Xiaomi MiMo' %></a>
   <nav>
+    <% if (is_home && is_home()) { %>
+      <a href="#home-blog" class="topbar-blog-quick" data-home-blog-jump="true">Blog</a>
+    <% } %>
     <% ((theme.topbar && theme.topbar.nav) || []).forEach(function(item){ %>
       <a href="<%- url_for(item.url || '/') %>"><%= item.text %></a>
     <% }) %>
