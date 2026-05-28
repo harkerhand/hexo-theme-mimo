@@ -50,4 +50,10 @@
       <div class="blog-arrow">→</div>
     </a>
   <% }) %>
+
+  <% if (site.posts && site.posts.length > blogLimit) { %>
+    <div class="blog-more-wrap">
+      <a class="blog-more" href="<%- url_for('/archives/page/2/') %>">更多</a>
+    </div>
+  <% } %>
 </section>
