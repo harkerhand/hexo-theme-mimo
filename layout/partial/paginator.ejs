@@ -1,6 +1,17 @@
 <% if (page.total > 1){ %>
-<nav class="pager">
-  <% if (page.prev){ %><a href="<%- url_for(page.prev_link) %>">← Newer</a><% } %>
-  <% if (page.next){ %><a href="<%- url_for(page.next_link) %>">Older →</a><% } %>
+<nav class="pager pager-center">
+  <% if (page.prev){ %>
+    <a class="pager-arrow" href="<%- url_for(page.prev_link) %>" aria-label="Previous page">←</a>
+  <% } else { %>
+    <span class="pager-arrow is-disabled" aria-hidden="true">←</span>
+  <% } %>
+
+  <span class="pager-index"><%= page.current %>/<%= page.total %></span>
+
+  <% if (page.next){ %>
+    <a class="pager-arrow" href="<%- url_for(page.next_link) %>" aria-label="Next page">→</a>
+  <% } else { %>
+    <span class="pager-arrow is-disabled" aria-hidden="true">→</span>
+  <% } %>
 </nav>
 <% } %>

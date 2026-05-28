@@ -26,3 +26,10 @@ if (heroPanel && lens && lens.dataset.followMouse === 'true') {
     lens.style.opacity = '0';
   });
 }
+
+Array.from(document.querySelectorAll('figure.highlight')).forEach((block) => {
+  const langClass = Array.from(block.classList).find((cls) => cls !== 'highlight');
+  if (langClass) {
+    block.setAttribute('data-lang', langClass);
+  }
+});

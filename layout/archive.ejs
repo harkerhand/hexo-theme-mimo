@@ -1,5 +1,5 @@
 <section class="block reveal">
-  <h1><%= page.title || 'Archives' %></h1>
+  <%- partial('partial/paginator') %>
   <div class="post-grid">
     <% page.posts.each(function(post, idx){ %>
       <article class="card">
@@ -10,5 +10,3 @@
     <% }) %>
   </div>
 </section>
-
-<%- partial('partial/paginator') %>

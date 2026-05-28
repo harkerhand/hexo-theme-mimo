@@ -1,5 +1,10 @@
-<article class="article reveal">
-  <p class="eyebrow"><%= page.date.format('YYYY-MM-DD') %></p>
-  <h1><%= page.title %></h1>
-  <div class="content"><%- page.content %></div>
+<article class="article article-post reveal">
+  <header class="post-head">
+    <h1><%= page.title %></h1>
+    <time datetime="<%= page.date.toISOString() %>"><%= page.date.format('MMMM D, YYYY') %></time>
+  </header>
+
+  <div class="content post-content">
+    <%- page.content %>
+  </div>
 </article>
