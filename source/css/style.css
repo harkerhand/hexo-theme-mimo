@@ -70,6 +70,7 @@ a { color: inherit; text-decoration: none; }
 }
 .topbar nav { display: flex; gap: 2.2rem; margin-right: -20px; }
 .topbar nav a { font-weight: 800; font-size: 1.26rem; line-height: 1; }
+
 .topbar-blog-quick {
   transition: opacity .18s ease;
 }
@@ -148,6 +149,14 @@ a { color: inherit; text-decoration: none; }
   border: 1px solid var(--line);
   background: rgba(244, 243, 239, 0.88);
   padding: 2rem 1.7rem;
+  transition: background-color .18s ease, color .18s ease;
+}
+.card:hover {
+  background: #111 !important;
+  color: #fff;
+}
+.card:hover p {
+  color: #d6dce3;
 }
 .model-card-link {
   display: block;
@@ -402,6 +411,11 @@ a { color: inherit; text-decoration: none; }
 .post-content td {
   padding: .8rem .9rem;
   border-bottom: 1px solid #e6e2d8;
+  border-right: 1px solid #e6e2d8;
+}
+.post-content th:last-child,
+.post-content td:last-child {
+  border-right: 0;
 }
 .post-content tr:last-child td { border-bottom: 0; }
 .post-content :not(pre) > code {
@@ -410,24 +424,26 @@ a { color: inherit; text-decoration: none; }
   border-radius: 4px;
 }
 .post-content pre {
-  overflow: auto;
+  overflow-x: auto;
+  overflow-y: hidden;
   padding: 0;
-  background: #ece9e0;
   border: 1px solid #dad4c8;
   border-radius: 8px;
 }
 
-/* Prism syntax highlighting */
-.post-content pre[class*="language-"] {
-  margin: 1.45em 0;
-  background: #ece9e0;
+/* Shiki syntax highlighting */
+.post-content pre.shiki {
+  margin: 1em 0;
+  background: #ece9e0 !important;
   color: #2f3540;
   position: relative;
   border-radius: 8px;
   border: 1px solid #dad4c8;
-  overflow: auto;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: .85rem 1rem;
 }
-.post-content pre[class*="language-"]::before {
+.post-content pre.shiki::before {
   content: attr(data-language);
   position: absolute;
   top: .45rem;
@@ -440,158 +456,41 @@ a { color: inherit; text-decoration: none; }
   border: 1px solid #d0c7b8;
   border-radius: 999px;
   padding: .2rem .45rem;
+  z-index: 2;
 }
-.post-content code[class*="language-"] {
-  font-family: "JetBrains Mono", "Fira Code", Consolas, monospace;
-  font-size: .92em;
-  color: #2f3540;
+.post-content pre.shiki .shiki-grid {
+  display: flex;
+  align-items: flex-start;
+  min-width: max-content;
 }
-.post-content pre .token.comment,
-.post-content pre .token.prolog,
-.post-content pre .token.doctype,
-.post-content pre .token.cdata { color: #7f8791; }
-.post-content pre .token.punctuation { color: #5e6670; }
-.post-content pre .token.property,
-.post-content pre .token.tag,
-.post-content pre .token.boolean,
-.post-content pre .token.number,
-.post-content pre .token.constant,
-.post-content pre .token.symbol,
-.post-content pre .token.deleted { color: #0f6ab4; }
-.post-content pre .token.selector,
-.post-content pre .token.attr-name,
-.post-content pre .token.string,
-.post-content pre .token.char,
-.post-content pre .token.builtin,
-.post-content pre .token.inserted { color: #2d7f4f; }
-.post-content pre .token.operator,
-.post-content pre .token.entity,
-.post-content pre .token.url,
-.post-content pre .language-css .token.string,
-.post-content pre .style .token.string { color: #9a6a00; }
-.post-content pre .token.atrule,
-.post-content pre .token.attr-value,
-.post-content pre .token.keyword { color: #b42346; }
-.post-content pre .token.function,
-.post-content pre .token.class-name { color: #6d3fb3; }
-.post-content pre .token.regex,
-.post-content pre .token.important,
-.post-content pre .token.variable { color: #b65a00; }
-
-/* Prism line numbers layout */
-.post-content pre.line-numbers {
-  position: relative;
-  padding-left: 3.8em;
-  counter-reset: linenumber;
-}
-.post-content pre.line-numbers code {
-  display: block;
-  padding: .9rem 1rem .9rem .95rem;
-  line-height: 1.62;
-}
-.post-content pre.line-numbers .line-numbers-rows {
-  position: absolute;
-  pointer-events: none;
-  top: .9rem;
-  left: 0;
-  width: 3.1em;
-  bottom: .9rem;
+.post-content pre.shiki .line-numbers-rows {
+  flex: 0 0 3.9rem;
   border-right: 1px solid #d3ccbe;
-  background: transparent;
+  margin-right: .9rem;
+  padding-right: .75rem;
   user-select: none;
 }
-.post-content pre.line-numbers .line-numbers-rows > span {
+.post-content pre.shiki .line-no {
   display: block;
-  counter-increment: linenumber;
-  line-height: 1.62;
-}
-.post-content pre.line-numbers .line-numbers-rows > span:before {
-  content: counter(linenumber);
-  display: block;
-  padding-right: .65em;
   text-align: right;
   color: #9a9385;
-  font: 500 .88rem/1.62 "JetBrains Mono", "Fira Code", Consolas, monospace;
+  font-family: "JetBrains Mono", "Fira Code", Consolas, monospace;
+  font-size: .92em;
+  line-height: 1.55;
 }
-
-/* Hexo highlight.js output */
-.post-content figure.highlight {
-  margin: 1.15em 0;
-  background: #ece9e0;
-  border: 1px solid #dad4c8;
-  border-radius: 8px;
-  overflow: hidden;
-  position: relative;
+.post-content pre.shiki code {
+  display: block;
+  font-family: "JetBrains Mono", "Fira Code", Consolas, monospace;
+  font-size: .92em;
+  line-height: 1.55;
 }
-.post-content figure.highlight::before {
-  content: attr(data-lang);
-  position: absolute;
-  top: .45rem;
-  right: .62rem;
-  font: 700 .72rem/1 "JetBrains Mono", "Fira Code", Consolas, monospace;
-  text-transform: uppercase;
-  letter-spacing: .06em;
-  color: #8f8676;
-  background: #e5dfd2;
-  border: 1px solid #d0c7b8;
-  border-radius: 999px;
-  padding: .2rem .45rem;
+.post-content pre.shiki .line {
+  display: block;
+  padding: 0 .4rem 0 0;
+  min-height: 1.55em;
+  line-height: 1.55;
+  white-space: pre;
 }
-.post-content figure.highlight table {
-  width: 100%;
-  border: 0;
-  border-collapse: collapse;
-  background: transparent;
-}
-.post-content figure.highlight td {
-  border: 0;
-  padding: 0;
-  vertical-align: top;
-}
-.post-content figure.highlight .gutter {
-  width: 52px;
-  min-width: 52px;
-  background: transparent;
-  border-right: 1px solid #d3ccbe;
-}
-.post-content figure.highlight .gutter pre {
-  margin: 0;
-  padding: .9rem .55rem;
-  background: transparent;
-  border: 0;
-  color: #97907f;
-  text-align: right;
-  font: 500 .88rem/1.62 "JetBrains Mono", "Fira Code", Consolas, monospace;
-}
-.post-content figure.highlight .code pre {
-  margin: 0;
-  padding: .9rem 1rem .9rem .95rem;
-  background: transparent;
-  border: 0;
-  color: #2f3540;
-  font: 500 .92rem/1.62 "JetBrains Mono", "Fira Code", Consolas, monospace;
-}
-.post-content figure.highlight .line {
-  display: inline-block;
-  width: 100%;
-}
-
-/* token colors for highlight.js class names */
-.post-content .highlight .comment { color: #7f8791; }
-.post-content .highlight .keyword,
-.post-content .highlight .selector-tag,
-.post-content .highlight .title.function_ { color: #b42346; font-weight: 600; }
-.post-content .highlight .string,
-.post-content .highlight .attr,
-.post-content .highlight .attribute { color: #2d7f4f; }
-.post-content .highlight .number,
-.post-content .highlight .literal { color: #0f6ab4; }
-.post-content .highlight .type,
-.post-content .highlight .class .title,
-.post-content .highlight .title.class_ { color: #6d3fb3; }
-.post-content .highlight .built_in,
-.post-content .highlight .function,
-.post-content .highlight .meta .keyword { color: #9a6a00; }
 .pager { margin-top: 2rem; display: flex; justify-content: space-between; }
 .pager-center {
   margin: .4rem 0 1rem;

@@ -30,13 +30,6 @@ function initHeroLens(root = document) {
   });
 }
 
-function applyCodeLangBadges(root = document) {
-  Array.from(root.querySelectorAll('figure.highlight')).forEach((block) => {
-    const langClass = Array.from(block.classList).find((cls) => cls !== 'highlight');
-    if (langClass) block.setAttribute('data-lang', langClass);
-  });
-}
-
 let cleanupHomeBlogQuick = null;
 
 function initHomeBlogQuick() {
@@ -87,8 +80,16 @@ function initPage(root = document, options = {}) {
   const animate = options.animate !== false;
   if (animate) applyRevealDelays(root);
   initHeroLens(root);
-  applyCodeLangBadges(root);
   initHomeBlogQuick();
+  if (typeof renderMathInElement === 'function') {
+    renderMathInElement(root, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "$", right: "$", display: false}
+      ],
+      throwOnError: false
+    });
+  }
 }
 
 function isInternalNavLink(anchor) {
