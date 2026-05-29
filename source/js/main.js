@@ -48,7 +48,14 @@ function initHomeBlogQuick() {
   const jump = document.querySelector('[data-home-blog-jump="true"]');
   const blogHead = document.querySelector('#home-blog-head');
   const topbar = document.querySelector('.topbar');
-  if (!jump || !blogHead || !topbar) return;
+  if (!jump) return;
+
+  if (!blogHead || !topbar) {
+    jump.style.display = 'none';
+    return;
+  }
+
+  jump.style.display = '';
 
   const getTopbarHeight = () => topbar.getBoundingClientRect().height;
   const updateVisibility = () => {
